@@ -1,0 +1,12 @@
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/implementations/Exceptions/UserDaoHibException.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/config/AppInit.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/model/User.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/config/WebConfig.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/abstracts/Executor/Executor.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/implementations/UserDao/UserDaoFactory.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/abstracts/Executor/ResultHandler.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/abstracts/UserDao/UserDAO.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/implementations/dbHelper/DBHelper.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/controllers/HomeController.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/implementations/Executor/ExecutorImpl.java
+/Users/alexeypavlenko/Dropbox/Java.Mentor/Tasks/TasksWithSpring/SpringExampleOne/src/main/java/dao/implementations/UserDao/UserDaoHib.java
