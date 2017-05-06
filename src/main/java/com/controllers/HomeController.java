@@ -1,9 +1,7 @@
 package com.controllers;
 
-import com.dao.implementations.Exceptions.UserDaoImplException;
 import com.model.User;
-import com.services.abstracts.userService.UserService;
-import com.services.implementations.userServiceImpl.UserServiceImpl;
+import com.services.abstracts.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,19 +21,13 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String printAdmin(ModelMap modelMap) {
+    public String getHome(ModelMap modelMap) {
 
-
-        List<User> x = null;
-        try {
-            x = userService.getUsers();
-        } catch (UserDaoImplException e) {
-            e.printStackTrace();
-        }
+        List<User> x = userService.getAllUser();
 
         modelMap.addAttribute("list", x);
 
-        return "admin";
+        return "welcome";
     }
 
 

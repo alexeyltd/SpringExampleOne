@@ -14,11 +14,11 @@
 
 <form action="/admin/update" method="POST">
     ID: <input type="text" name="id" value="1"/>
-    Name: <input type="text" name="name" value="max"/>
     Login: <input type="text" name="login" value="maxGen"/>
     Password: <input type="password" name="password" value="123"/>
     Role: <input type="text" name="role" value="user"/>
     <input type="submit" value="Submit">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 
 

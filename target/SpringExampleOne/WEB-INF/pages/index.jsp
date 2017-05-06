@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <c:redirect url="admin.jsp"/>
+    <c:redirect url="/login"/>
 
 </body>
 </html>

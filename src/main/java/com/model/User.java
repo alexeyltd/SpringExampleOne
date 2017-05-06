@@ -1,128 +1,106 @@
 package com.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- * Created by alexeypavlenko on 29/04/2017.
- */
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
+
 @Entity
-@Table(name = "data")
-public class User implements Serializable {
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "login")
+    @Column(name = "login",  nullable = false, unique = true)
     private String login;
 
-    @Column(name = "password")
+
+    @Column(name = "password", length = 30, nullable = false)
     private String password;
 
-    @Column(name = "role")
-    private String role;
+
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @JoinTable(name = "permissions",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
+
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
 
 
     public User() {
     }
 
-    public User(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public User(long id, String name, String login, String password, String role) {
-        this.id = id;
-        this.name = name;
+    public User(String login, String password, Set<Role> roles) {
         this.login = login;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
     }
 
-    public User(String name, String login, String password, String role) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.role = role;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
         return login;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getUsername() {
+        return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + "'" +
-                ", login='" + login +  "'" +
-                ", password='" + password +  "'" +
-                ", role='" + role + '\'' +  "'" +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != user.id) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return role != null ? role.equals(user.role) : user.role == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        return result;
-    }
 }

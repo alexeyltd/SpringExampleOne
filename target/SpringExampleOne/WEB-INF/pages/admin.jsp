@@ -18,23 +18,23 @@
         <caption><h2>List of Users</h2></caption>
         <tr>
             <th>ID</th>
-            <th>Name</th>
             <th>LOGIN</th>
             <th>PASSWORD</th>
             <th>ROLE</th>
             <th>UPDATE</th>
             <th>DELETE</th>
         </tr>
-        <%--<c:forEach var="user" items="${listUsers.rows}">--%>
         <c:forEach var="user" items="${list}">
             <tr>
                 <td><c:out value="${user.id}" /></td>
-                <td><c:out value="${user.name}" /></td>
                 <td><c:out value="${user.login}" /></td>
                 <td><c:out value="${user.password}" /></td>
-                <td><c:out value="${user.role}" /></td>
+                <td><c:out value="${user.roles}" /></td>
                 <td><form action="/admin/update"><input type="submit" value="update"></form></td>
-                <td><form action="/admin/delete?id=${user.id}" method="POST"><input type="submit" name="id" value="delete"></form></td>
+                <td><form action="/admin/delete?id=${user.id}" method="POST">
+                    <input type="submit" name="id" value="delete">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </form></td>
             </tr>
         </c:forEach>
     </table>

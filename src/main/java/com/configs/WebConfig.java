@@ -1,5 +1,7 @@
 package com.configs;
 
+import com.configs.init.TestDataInitializer;
+import com.security.configs.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -25,7 +27,7 @@ import java.util.Map;
 @ComponentScan(basePackages = "com.*")
 @EnableTransactionManagement
 @PropertySource(value = {"classpath:hibernate.properties"})
-//@Import({SecurityConfig.class})
+@Import({SecurityConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 
@@ -62,7 +64,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return properties;
     }
 
-    @Bean
+    @Bean(name = "dataSource")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("hibernate.connection.driver_class"));
@@ -77,6 +79,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
     @Bean
@@ -90,5 +93,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    @Bean(initMethod = "init")
+    public TestDataInitializer initTestData() {
+        return new TestDataInitializer();
+    }
 
 }
